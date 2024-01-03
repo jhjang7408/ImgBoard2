@@ -213,14 +213,14 @@
 
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
           <div class="list-inline">
-            <div class="list-inline-item">
+            <div class="list-inline-item"  th:unless="${session['signinmemberId']}">
               <a href="/member/signin">로그인</a>
             </div>
-            <div class="list-inline-item">
+            <div class="list-inline-item" th:if="${session['signinmemberId']}">
               <a href="/member/logout">로그아웃</a>
             </div>
             <!--            th:if="${session.loginId != null}"-->
-            <div class="list-inline-item">
+            <div class="list-inline-item" th:if="${session['signinmemberId']}">
               <li class="nav-item dropdown" >
                 <a
                         class="nav-link dropdown-toggle"
