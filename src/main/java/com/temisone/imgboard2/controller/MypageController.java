@@ -6,10 +6,9 @@ import com.temisone.imgboard2.service.MypageService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Member;
 import java.util.Optional;
@@ -40,5 +39,39 @@ public class MypageController {
         return "redirect:/mypage/loginfochange";
     }
 
+
+    @PostMapping("/mypage/passwordChange")
+    public String passwordChange(@ModelAttribute MemberEntity memberEntity,
+                                 @RequestParam("newPassword") String newPassword,
+                                 @RequestParam("newPasswordCheck") String newPasswordCheck,
+                                HttpSession session){
+
+        if (newPassword.equals(newPasswordCheck)) {
+
+            memberEntity.setMemberPassword(newPassword);
+
+            mypageService.update(memberEntity);
+
+            session.invalidate();
+
+            return "/member/signin";
+
+        } else {
+
+            return "redirect:/mypage/loginfochange";
+
+        }
+
+    }
+
+
+    @GetMapping("/mypage/delete/{noId}")
+    public String delete(@PathVariable int noId, HttpSession session){
+
+        session.invalidate();
+        mypageService.delete(noId);
+
+        return "redirect:/";
+    }
 
 }

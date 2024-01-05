@@ -24,4 +24,9 @@ public class MypageService {
         memberRepository.save(memberEntity);
    }
 
+
+   public void delete(int noId){
+        memberRepository.deleteById(noId);
+   }
+
 }
