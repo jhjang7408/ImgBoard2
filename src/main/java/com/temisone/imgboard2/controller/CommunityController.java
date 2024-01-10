@@ -8,13 +8,12 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -57,6 +56,46 @@ public class CommunityController {
     }
 
 
+    @GetMapping("/community/view/{communityId}")
+    public String view(@PathVariable int communityId, Model model){
+
+        Optional<CommunityEntity> communityEntity = communityService.view(communityId);
+
+        model.addAttribute("view", communityEntity.get());
+
+        return "/community/view";
+    }
+
+
+
+    @GetMapping("/community/update/{communityId}")
+    public String updateForm(@PathVariable int communityId, Model model){
+
+        Optional<CommunityEntity> communityEntity = communityService.view(communityId);
+
+        model.addAttribute("view", communityEntity.get());
+
+        return "/community/update";
+    }
+
+    @PostMapping("/community/update/{communityId}")
+    public String update(@PathVariable int communityId, @ModelAttribute CommunityEntity communityEntity,
+                         @RequestParam("file") MultipartFile file) throws IOException{
+
+        if(file.isEmpty()){
+            Optional<CommunityEntity> communityEntity1 = communityService.view(communityId);
+
+            communityEntity.setImgname(communityEntity1.get().getImgname());
+            communityEntity.setImgpath(communityEntity1.get().getImgpath());
+
+            communityService.update(communityEntity);
+        } else {
+
+            communityService.update2(communityEntity, file);
+        }
+
+        return "redirect:/community/board";
+    }
 
 
 

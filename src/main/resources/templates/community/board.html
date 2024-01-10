@@ -463,7 +463,7 @@
                                     <tr>
                                         <th scope="col">번호</th>
                                         <th scope="col">제목</th>
-                                        <th scope="col">쓴사람</th>
+                                        <th scope="col">닉네임</th>
                                         <th scope="col">날짜</th>
                                     </tr>
                                     </thead>
@@ -471,8 +471,8 @@
                                     <tbody>
                                     <tr th:each="coco : ${list}">
 
-                                        <td><a th:href="@{/community/view/{communityId}(communityId=${coco.communityId})}" class="text-decoration-none" th:text="${coco.communityId}">번호</a></td>
-                                        <td><a th:href="@{/community/view/{communityId}(communityId=${coco.communityId})}" class="text-decoration-none" th:text="${coco.communityTitle}">제목</a></td>
+                                        <td><a th:href="@{|/community/view/${coco.communityId}|}" class="text-decoration-none" th:text="${coco.communityId}">번호</a></td>
+                                        <td><a th:href="@{|/community/view/${coco.communityId}|}" class="text-decoration-none" th:text="${coco.communityTitle}">제목</a></td>
                                         <td th:text="${coco.nickName}">작성자</td>
                                         <td th:text="${#temporals.format(coco.regdate, 'yyyy-MM-dd')}">시간</td>
                                     </tr>
@@ -486,12 +486,16 @@
 
                                     <div class="my-4">
                                         <div class="float-end">
-                                            <button type="button" class="btn btn-primary listBtn" th:unless="${session['signinmemberId']}">
-                                                <a href="/member/signin" style="color: white;">글쓰기 </a>
-                                            </button>
-                                            <button type="button" class="btn btn-primary listBtn" th:if="${session['signinmemberId']}">
-                                                <a href="/community/write" style="color: white;">글쓰기</a>
-                                            </button>
+                                            <a href="/member/signin">
+                                                <button type="button" class="btn btn-primary listBtn" th:unless="${session['signinmemberId']}">
+                                                    글쓰기
+                                                </button>
+                                            </a>
+                                            <a href="/community/write">
+                                                <button type="button" class="btn btn-primary listBtn" th:if="${session['signinmemberId']}">
+                                                    글쓰기
+                                                </button>
+                                            </a>
 
                                         </div>
                                     </div>

@@ -17,6 +17,9 @@ public class CommunityEntity {
     private int communityId;
 
     @Column
+    private String memberId;
+
+    @Column
     private String nickName;
 
     @Column

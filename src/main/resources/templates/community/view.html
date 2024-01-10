@@ -408,10 +408,6 @@
 <div>
     <!-- navbar vertical -->
 
-
-
-
-
     <!-- main -->
     <main>
 
@@ -428,7 +424,7 @@
                                     <li class="breadcrumb-item"><a href="/">메인</a></li>
                                     <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
                                     <li class="breadcrumb-item"><a href="/community/board">질문정보게시판</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">쓰기</li>
+                                    <li class="breadcrumb-item active" aria-current="page">읽기</li>
                                 </ol>
                             </nav>
                         </div>
@@ -441,85 +437,92 @@
                     <div class="row">
                         <!-- logo -->
                         <div class="col-12">
-                            <h1 class="fw-bold">게시물 쓰기</h1>
+                            <h1 class="fw-bold">게시물 보기</h1>
                         </div>
                     </div>
                 </div>
             </section>
             <!-- row -->
-            <div class="row">
+            <div class="row mt-3">
 
-                <div class="col-lg-8 col-12">
+                <div class="col">
                     <!-- card -->
-                    <div class="card mb-6 card-lg">
+                    <div class="card">
                         <!-- card body -->
-                        <div class="card-body p-6 ">
-                            <h4 class="mb-4 h5">쓰기</h4>
+                        <div class="card-body">
+                            <h4 class="mb-4 h5">읽기</h4>
                             <div class="row">
                                 <!-- input -->
-
-                                <form action="/community/write" method="post" enctype="multipart/form-data">
-
-                                    <!-- input -->
-                                    <div class="mb-3 col-lg-8">
-                                        <label class="form-label">제목</label>
-                                        <input type="text" class="form-control" name="communityTitle" placeholder="제목" required>
-                                    </div>
-                                    <!-- input -->
-                                    <div class="mb-3 col-lg-8">
-                                        <label class="form-label">작성자</label>
-                                        <input type="text" class="form-control" name="nickName"  th:value="${nike.nickName}" readonly>
-                                    </div>
-                                    <!-- input -->
-                                    <div class="mb-3 col-lg-8">
-                                        <input type="hidden" class="form-control" name="memberId"  th:value="${session['signinmemberId']}" readonly>
-                                    </div>
-                                    <!-- input -->
-                                    <div class="mb-8 col-lg-8">
-                                        <label class="form-label">내용</label>
-                                        <textarea class="form-control" name="communityContent" required></textarea>
-                                    </div>
-                                    <!-- input -->
-                                    <div class="mb-8 col-lg-8">
-                                        <label class="form-label">파일, 이미지</label>
-                                        <input type="file" class="form-control" name="file"  placeholder="파일, 이미지">
-                                    </div>
-
-
-
-
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <button type="submit" class="w-100 btn btn-primary btn-lg">게시글 등록</button>
-                                        </div>
-                                    </div>
-
-
-                                </form>
-
-
+                                <div class="mb-3 col-lg-8">
+                                    <label class="form-label">번호</label>
+                                    <input type="text" class="form-control" th:value="${view.communityId}" readonly>
+                                </div>
                                 <!-- input -->
+                                <div class="mb-3 col-lg-8">
+                                    <label class="form-label">제목</label>
+                                    <input type="text" class="form-control" th:value="${view.communityTitle}" readonly>
+                                </div>
+                                <!-- input -->
+                                <div class="mb-3 col-lg-8">
+                                    <label class="form-label">작성자</label>
+                                    <input type="text" class="form-control" th:value="${view.nickName}" readonly>
+                                </div>
+                                <!-- input -->
+                                <div class="mb-8 col-lg-8">
+                                    <label class="form-label">내용</label>
+                                    <textarea cols="40" rows="10" type="text" class="form-control" th:text="${view.communityContent}" readonly></textarea>
+                                </div>
+                                <!-- input -->
+                                <div class="mb-8 col-lg-8">
+                                    <label class="form-label">파일, 사진</label>
+                                    <img th:src="${view.imgpath}" width="250" height="250">
+                                </div>
+
+
+
+                                <div class="my-4">
+                                    <div class="float-end">
+
+                                        <a href="/community/board"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
+
+                                        <a th:href="@{|/community/update/${view.communityId}|}" th:if="${session['signinmemberId'] == view.memberId}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+
+                                        <button type="button" class="btn btn-danger" th:if="${session['signinmemberId'] == view.memberId}">삭제</button>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
 
                             </div>
 
-                            <!-- input -->
+
 
 
                         </div>
+
+
+
                     </div>
+
+
+
+
                 </div>
+
 
             </div>
 
 
+
+
         </div>
-
-
-
-
-
-
 
 
     </main>
