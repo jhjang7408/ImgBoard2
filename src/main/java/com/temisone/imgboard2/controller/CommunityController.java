@@ -1,7 +1,9 @@
 package com.temisone.imgboard2.controller;
 
 import com.temisone.imgboard2.entity.CommunityEntity;
+import com.temisone.imgboard2.entity.CommunityReviewEntity;
 import com.temisone.imgboard2.entity.MemberEntity;
+import com.temisone.imgboard2.service.CommunityReviewService;
 import com.temisone.imgboard2.service.CommunityService;
 import com.temisone.imgboard2.service.MypageService;
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +22,8 @@ import java.util.Optional;
 public class CommunityController {
 
     private final CommunityService communityService;
+
+    private final CommunityReviewService communityReviewService;
 
     private final MypageService mypageService;
 
@@ -62,6 +66,10 @@ public class CommunityController {
         Optional<CommunityEntity> communityEntity = communityService.view(communityId);
 
         model.addAttribute("view", communityEntity.get());
+
+        List<CommunityReviewEntity> review = communityReviewService.review(communityId);
+
+        model.addAttribute("review", review);
 
         return "/community/view";
     }
