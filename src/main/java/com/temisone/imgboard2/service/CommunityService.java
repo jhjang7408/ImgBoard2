@@ -67,4 +67,9 @@ public class CommunityService {
     }
 
 
+    public void delete(int communityId){
+        communityRepository.deleteById(communityId);
+    }
+
+
 }

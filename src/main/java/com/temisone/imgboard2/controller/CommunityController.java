@@ -98,5 +98,13 @@ public class CommunityController {
     }
 
 
+    @GetMapping("/community/delete/{communityId}")
+    public String delete(@PathVariable int communityId){
+        communityService.delete(communityId);
+
+        return "redirect:/community/board";
+    }
+
+
 
 }

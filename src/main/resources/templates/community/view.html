@@ -51,7 +51,7 @@
                 <div class="col-xxl-2 col-lg-3 text-center">
 
                     <a class="navbar-brand d-none d-lg-block" href="/">
-                        <img th:src="@{/images/수신호멈.jpg}"
+                        <img th:src="@{/images/logo/freshcart-logo.svg}"
                              alt="eCommerce HTML Template"
                         />
                     </a>
@@ -60,7 +60,7 @@
                     <div class="d-flex justify-content-between w-100 d-lg-none text-center">
                         <a class="navbar-brand" href="/">
                             <img
-                                    th:src="@{/images/수신호멈.jpg}"
+                                    th:src="@{/images/logo/freshcart-logo.svg}"
                                     alt="eCommerce HTML Template"
 
                             />
@@ -360,7 +360,7 @@
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/qa/qalist"
+                                    <a class="dropdown-item" href="/community/board"
                                     >질문/정보 게시판</a
                                     >
                                 </li>
@@ -487,7 +487,7 @@
 
                                         <a th:href="@{|/community/update/${view.communityId}|}" th:if="${session['signinmemberId'] == view.memberId}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
 
-                                        <button type="button" class="btn btn-danger" th:if="${session['signinmemberId'] == view.memberId}">삭제</button>
+                                        <a th:href="@{|/community/delete/${view.communityId}|}"><button type="button" class="btn btn-danger" th:if="${session['signinmemberId'] == view.memberId}">삭제</button></a>
 
 
 
@@ -582,7 +582,7 @@
                                 <a href="#!" class="nav-link">가이드</a>
                             </li>
                             <li class="nav-item mb-2">
-                                <a href="#!" class="nav-link">질문/정보 게시판</a>
+                                <a href="/community/board" class="nav-link">질문/정보 게시판</a>
                             </li>
                         </ul>
                     </div>
@@ -606,12 +606,12 @@
 </footer>
 <!-- Javascript-->
 <!-- Libs JS -->
-<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<!--<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
 <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
-<!-- Theme JS -->
-<script th:src="@{/js/theme.min.js}"></script>
+&lt;!&ndash; Theme JS &ndash;&gt;
+<script th:src="@{/js/theme.min.js}"></script>-->
 
 
 
