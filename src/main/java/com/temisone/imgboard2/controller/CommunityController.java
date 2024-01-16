@@ -61,16 +61,19 @@ public class CommunityController {
 
 
     @GetMapping("/community/view/{communityId}")
-    public String view(@PathVariable int communityId, Model model){
+    public String view(@PathVariable int communityId, Model model, HttpSession session){
 
         Optional<CommunityEntity> communityEntity = communityService.view(communityId);
-
         model.addAttribute("view", communityEntity.get());
 
         List<CommunityReviewEntity> review = communityReviewService.review(communityId);
-
         model.addAttribute("review", review);
 
+        String loginId = (String) session.getAttribute("signinmemberId");
+        if(loginId != null) {
+            MemberEntity member = mypageService.loginfo(loginId);
+            model.addAttribute("login", member);
+        }
         return "/community/view";
     }
 

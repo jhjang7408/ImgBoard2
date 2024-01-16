@@ -1,5 +1,6 @@
 package com.temisone.imgboard2.service;
 
+import com.temisone.imgboard2.entity.CommunityEntity;
 import com.temisone.imgboard2.entity.CommunityReviewEntity;
 import com.temisone.imgboard2.repository.CommunityReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,8 @@ public class CommunityReviewService {
         return communityReviewRepository.findByCommunityId(communityId);
     }
 
+    public void write(CommunityReviewEntity communityReviewEntity){
+        communityReviewRepository.save(communityReviewEntity);
+    }
 
 }

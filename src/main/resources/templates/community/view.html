@@ -478,6 +478,57 @@
                                     <img th:src="${view.imgpath}" width="150" height="150">
                                 </div>
 
+                                <h5 class="mb-4 h5">댓글</h5>
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">닉네임</th>
+                                        <th scope="col">내용</th>
+                                        <th scope="col">시간</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr th:each="coco : ${review}">
+                                        <td class="text-decoration-none" th:text="${coco.nickName}"></td>
+                                        <td class="text-decoration-none" th:text="${coco.communityreviewContent}"></td>
+                                        <td th:text="${#temporals.format(coco.regdate, 'yyyy-MM-dd')}"></td>
+                                    </tr>
+
+                                    </tbody>
+
+
+                                </table>
+
+
+                                <form th:action="@{|/communityreview/write/${view.communityId}|}" method="post" th:if="${session['signinmemberId']}">
+
+                                    <input type="hidden" class="form-control" name="communityId" th:value="${view.communityId}">
+
+                                    <div>
+                                        <textarea class="form-control" name="communityreviewContent" required></textarea>
+                                    </div>
+
+                                    <input type="hidden" name="nickName" th:value="${login.nickName}">
+
+                                    <div class="my-4">
+                                        <div class="float-end">
+                                            <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+
+                                <div class="my-4">
+                                    <div class="float-end">
+                                        <a href="/member/signin" th:unless="${session['signinmemberId']}">
+                                            <button type="button" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
+                                        </a>
+                                    </div>
+                                </div>
+
 
 
                                 <div class="my-4">

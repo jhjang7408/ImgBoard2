@@ -20,7 +20,7 @@ public class CommunityReviewEntity {
     private int communityId;
 
     @Column
-    private String communityreviewcontent;
+    private String communityreviewContent;
 
     @Column
     private String nickName;
