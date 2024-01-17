@@ -7,6 +7,7 @@ import com.temisone.imgboard2.service.CommunityReviewService;
 import com.temisone.imgboard2.service.CommunityService;
 import com.temisone.imgboard2.service.MypageService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -109,9 +110,11 @@ public class CommunityController {
     }
 
 
+    @Transactional
     @GetMapping("/community/delete/{communityId}")
     public String delete(@PathVariable int communityId){
         communityService.delete(communityId);
+        communityReviewService.delete2(communityId);
 
         return "redirect:/community/board";
     }

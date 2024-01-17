@@ -23,6 +23,9 @@ public class CommunityReviewEntity {
     private String communityreviewContent;
 
     @Column
+    private String memberId;
+
+    @Column
     private String nickName;
 
     @Column

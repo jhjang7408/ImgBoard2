@@ -5,6 +5,7 @@ import com.temisone.imgboard2.service.CommunityReviewService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +16,22 @@ public class CommunityReviewController {
 
     private final CommunityReviewService communityReviewService;
 
-    @PostMapping("communityreview/write/{communityId}")
+    @PostMapping("/communityreview/write/{communityId}")
     public String write(@PathVariable int communityId, @ModelAttribute CommunityReviewEntity communityReviewEntity){
 
         communityReviewService.write(communityReviewEntity);
 
         return "redirect:/community/view/" + communityId;
+    }
+
+
+    @GetMapping("/communityreview/delete/{communityreviewId}")
+    public String delete(@PathVariable int communityreviewId){
+
+        CommunityReviewEntity communityReviewEntity = communityReviewService.info(communityreviewId);
+        communityReviewService.delete(communityreviewId);
+
+        return "redirect:/community/view/" + communityReviewEntity.getCommunityId();
     }
 
 }

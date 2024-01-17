@@ -486,6 +486,7 @@
                                         <th scope="col">닉네임</th>
                                         <th scope="col">내용</th>
                                         <th scope="col">시간</th>
+                                        <th scope="col">x</th>
                                     </tr>
                                     </thead>
 
@@ -494,6 +495,12 @@
                                         <td class="text-decoration-none" th:text="${coco.nickName}"></td>
                                         <td class="text-decoration-none" th:text="${coco.communityreviewContent}"></td>
                                         <td th:text="${#temporals.format(coco.regdate, 'yyyy-MM-dd')}"></td>
+                                        <td>
+                                            <a th:href="@{|/communityreview/delete/${coco.communityreviewId}|}" th:if="${session['signinmemberId'] == coco.memberId}">
+                                                <button type="button" class="btn btn-danger">x</button>
+                                            </a>
+                                        </td>
+
                                     </tr>
 
                                     </tbody>
@@ -505,6 +512,7 @@
                                 <form th:action="@{|/communityreview/write/${view.communityId}|}" method="post" th:if="${session['signinmemberId']}">
 
                                     <input type="hidden" class="form-control" name="communityId" th:value="${view.communityId}">
+                                    <input type="hidden" class="form-control" name="memberId" th:value="${session['signinmemberId']}">
 
                                     <div>
                                         <textarea class="form-control" name="communityreviewContent" required></textarea>

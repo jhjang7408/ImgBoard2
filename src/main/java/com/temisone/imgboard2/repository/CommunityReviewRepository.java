@@ -9,4 +9,8 @@ public interface CommunityReviewRepository extends JpaRepository <CommunityRevie
 
     List<CommunityReviewEntity> findByCommunityId(int communityId);
 
+    CommunityReviewEntity findByCommunityreviewId(int communityreviewId);
+
+    void deleteByCommunityId(int communityId);
+
 }
